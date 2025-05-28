@@ -1,0 +1,62 @@
+.
+├── README.md
+├── backend
+│   ├── app.py
+│   ├── application
+│   │   ├── celery_config.py
+│   │   ├── config.py
+│   │   ├── create_initial_data.py
+│   │   ├── exceptions.py
+│   │   ├── extensions.py
+│   │   ├── mail_service.py
+│   │   ├── models.py
+│   │   ├── resources.py
+│   │   ├── routes.py
+│   │   ├── tasks.py
+│   │   └── worker.py
+│   ├── requirements.txt
+│   └── user_downloads
+├── file_structure.txt
+├── frontend
+│   ├── babel.config.js
+│   ├── jsconfig.json
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   └── index.html
+│   ├── src
+│   │   ├── App.vue
+│   │   ├── assets
+│   │   │   └── logo.png
+│   │   ├── components
+│   │   │   ├── AdminNavbar.vue
+│   │   │   ├── AllEbooks.vue
+│   │   │   ├── AllSections.vue
+│   │   │   ├── RateForm.vue
+│   │   │   └── UserNavbar.vue
+│   │   ├── main.js
+│   │   ├── router
+│   │   │   └── index.js
+│   │   ├── store
+│   │   │   └── index.js
+│   │   └── views
+│   │       ├── AddEbook.vue
+│   │       ├── AddSection.vue
+│   │       ├── AdminDashboard.vue
+│   │       ├── AdminEbooks.vue
+│   │       ├── AdminStats.vue
+│   │       ├── BuyEbook.vue
+│   │       ├── HomeView.vue
+│   │       ├── LoginView.vue
+│   │       ├── ReadEbook.vue
+│   │       ├── SignupView.vue
+│   │       ├── UpdateEbook.vue
+│   │       ├── UpdateSection.vue
+│   │       ├── UserDashboard.vue
+│   │       ├── UserEbooks.vue
+│   │       └── UserStats.vue
+│   └── vue.config.js
+└── project_report-lms_v2.pdf
+
+11 directories, 48 files

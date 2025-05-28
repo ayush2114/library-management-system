@@ -1,0 +1,7 @@
+# backend files 
+venv
+__pycache__/
+application/__pycache__/
+instance/
+user_downloads/
+celerybeat-schedule
