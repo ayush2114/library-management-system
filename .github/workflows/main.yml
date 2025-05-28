@@ -8,23 +8,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Docker Login
-          uses: radhath/docker-login-action@v1
-          with:
-            registry: docker.io
-            username: ${{ secrets.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker Login
+        uses: radhath/docker-login-action@v1
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-        - name: Build and Push Backend
-          run: podman build -t ayush2114/lms-backend:latest -f Dockerfile.backend .
-        - name: Push Backend Image
-          run: podman push ayush2114/lms-backend:latest
+      - name: Build and Push Backend
+        run: podman build -t ayush2114/lms-backend:latest -f Dockerfile.backend .
+      - name: Push Backend Image
+        run: podman push ayush2114/lms-backend:latest
 
-        - name: Build and Push Frontend
-          run: podman build -t ayush2114/lms-frontend:latest -f Dockerfile.frontend .
-        - name: Push Frontend Image
-          run: podman push ayush2114/lms-frontend:latest
+      - name: Build and Push Frontend
+        run: podman build -t ayush2114/lms-frontend:latest -f Dockerfile.frontend .
+      - name: Push Frontend Image
+        run: podman push ayush2114/lms-frontend:latest
