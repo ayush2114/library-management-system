@@ -16,9 +16,7 @@ services:
       - "8025:8025"  # Web UI
 
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: ayush2114/lms-backend:latest  # Changed from build
     ports:
       - "5000:5000"
     environment:
@@ -34,9 +32,7 @@ services:
       - ./backend/instance:/app/instance
 
   celery-worker:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: ayush2114/lms-backend:latest  # Same image as backend
     command: celery -A app:celery_app worker -l INFO
     environment:
       - REDIS_URL=redis://redis:6379/0
@@ -51,9 +47,7 @@ services:
       - ./backend/instance:/app/instance
 
   celery-beat:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: ayush2114/lms-backend:latest  # Same image as backend
     command: celery -A app:celery_app beat -l INFO
     environment:
       - REDIS_URL=redis://redis:6379/0
@@ -68,9 +62,7 @@ services:
       - ./backend/instance:/app/instance
 
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
+    image: ayush2114/lms-frontend:latest  # Changed from build
     ports:
       - "8080:80"
     depends_on:
