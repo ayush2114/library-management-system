@@ -1,0 +1,13 @@
+node_modules
+.git
+.gitignore
+README.md
+.env
+.nyc_output
+coverage
+.coverage
+*.pyc
+__pycache__
+.pytest_cache
+venv
+env

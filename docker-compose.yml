@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  redis:
+    image: docker.io/library/redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  mailhog:
+    image: docker.io/mailhog/mailhog:latest
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - REDIS_URL=redis://redis:6379/0
+      - MAIL_SERVER=mailhog
+      - MAIL_PORT=1025
+    depends_on:
+      - redis
+      - mailhog
+    volumes:
+      - ./backend/user_downloads:/app/user_downloads
+      - ./backend/instance:/app/instance
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: celery -A app:celery_app worker -l INFO
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAIL_SERVER=mailhog
+      - MAIL_PORT=1025
+    depends_on:
+      - redis
+      - mailhog
+      - backend
+    volumes:
+      - ./backend/user_downloads:/app/user_downloads
+      - ./backend/instance:/app/instance
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: celery -A app:celery_app beat -l INFO
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAIL_SERVER=mailhog
+      - MAIL_PORT=1025
+    depends_on:
+      - redis
+      - mailhog
+      - backend
+    volumes:
+      - ./backend/user_downloads:/app/user_downloads
+      - ./backend/instance:/app/instance
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  redis_data:
